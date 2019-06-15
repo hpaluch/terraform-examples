@@ -14,10 +14,27 @@ resource "aws_s3_bucket" "log_bucket" {
   region = var.aws_region
   acl    = "log-delivery-write"
 
+  lifecycle_rule {
+    id      = "log"
+    enabled = true
+
+    prefix = "log/"
+
+    tags = {
+      "rule"      = "log"
+      "autoclean" = "true"
+    }
+
+    # delete logs older than 60 days - avoid growing forgotten
+    # bucket to "infinity"...
+    expiration {
+      days = 60
+    }
+  }
+
   tags = {
     "rule" = "log"
   }
-
 }
 
 # bucket to store static WebSite
