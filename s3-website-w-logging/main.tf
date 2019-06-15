@@ -13,6 +13,11 @@ resource "aws_s3_bucket" "log_bucket" {
   bucket = var.log_bucket_name
   region = var.aws_region
   acl    = "log-delivery-write"
+
+  tags = {
+    "rule" = "log"
+  }
+
 }
 
 # bucket to store static WebSite
@@ -31,6 +36,9 @@ resource "aws_s3_bucket" "website_bucket" {
     target_prefix = "log/"
   }
 
+  tags = {
+    "rule" = "web"
+  }
 }
 
 # single bucket object - file index.html
@@ -40,6 +48,10 @@ resource "aws_s3_bucket_object" "object" {
   key          = "index.html"
   content_type = "text/html"
   source       = "./files/index.html"
+
+  tags = {
+    "rule" = "web"
+  }
 }
 
 
