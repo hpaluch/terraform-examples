@@ -90,7 +90,7 @@ terraform init
 # ...
 ```
 
-No we will validate our configuration using command:
+Now we will validate our configuration using command:
 ```bash
 terraform validate
 # Success! The configuration is valid.
@@ -134,6 +134,14 @@ aws s3 ls bucket_name
 
 NOTE: It will take some time for AWS to write logs in your log bucket
 (it done as batch process)
+
+When there is at least one log you can copy all logs using
+this single CLI command:
+```bash
+mkdir -p ~/aws/logs
+cd ~/aws/logs
+aws s3 cp --recursive  s3://MY-LOG-BUCKET/log/ .
+```
 
 
 # Cleaning up
