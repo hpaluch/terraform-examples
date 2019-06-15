@@ -1,0 +1,14 @@
+# terraform.tfvars-example
+#
+# Copy this file to terraform.tfvars
+# and customize your copy:  terraform.tfvars
+#
+# NOTE: bucket names should contain only DNS compatible
+#       characters: letters, numbers and dash '-'
+#                   DO NOT use underscore '_' - it is NOT DNS compatible
+website_bucket_name = "my-web-bucket"
+log_bucket_name     = "my-log-bucket"
+
+# change to your preferred region at will:
+aws_region = "us-east-1"
+

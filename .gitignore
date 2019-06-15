@@ -1,0 +1,9 @@
+# vim files
+*.swp
+*~
+
+# terraform stuff
+.terraform/
+terraform.tfvars
+*.tfstate
+*.backup
