@@ -81,10 +81,11 @@ resource "aws_s3_bucket" "website_bucket" {
 # single bucket object - file index.html
 resource "aws_s3_bucket_object" "object" {
   bucket = "${aws_s3_bucket.website_bucket.id}"
+  count = length(var.website_files)
   acl = "public-read"
-  key = "index.html"
-  content_type = "text/html"
-  source = "./files/index.html"
+  key = var.website_files[count.index]
+  content_type = "${var.website_mime[count.index]}"
+  source = "./files/${var.website_files[count.index]}"
 
   tags = {
     "rule" = "web"

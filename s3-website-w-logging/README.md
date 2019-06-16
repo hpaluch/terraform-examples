@@ -93,3 +93,14 @@ cd ~/aws/logs
 aws s3 cp --recursive  s3://MY-LOG-BUCKET/log/ .
 ```
 
+# Notes
+
+File `files/image.png` was created using this command (Image Magick):
+```bash
+convert  -pointsize 16 -font Ubuntu-Mono -fill blue \
+         -background lightblue caption:'image' files/image.png
+# issue this to list available fonts:
+convert -list font
+```
+There is good introducaton on: http://www.imagemagick.org/Usage/text/#pointsize
+
