@@ -90,7 +90,9 @@ this single CLI command:
 ```bash
 mkdir -p ~/aws/logs
 cd ~/aws/logs
-aws s3 cp --recursive  s3://MY-LOG-BUCKET/log/ .
+aws s3 sync --dryrun s3://MY-LOG-BUCKET/log/ .
+# it it looks reasonable then run:
+aws s3 sync  s3://MY-LOG-BUCKET/log/ .
 ```
 
 # Notes
