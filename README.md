@@ -53,7 +53,7 @@ to `~/aws/credentials` (terraform uses this file as default for some reason).
 
 Here is list of examples:
 
-* [S3 Static Website with logging](tree/master/s3-website-w-logging)
+* [S3 Static Website with logging](s3-website-w-logging)
 
 
 # Cleaning up
