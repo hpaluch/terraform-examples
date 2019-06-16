@@ -53,6 +53,26 @@ resource "aws_s3_bucket" "website_bucket" {
     target_prefix = "log/"
   }
 
+  # this policy ensures that all uploaded files are PUBLIC
+  # see: https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteAccessPermissionsReqd.html
+  # NOTE: Terraform does not allow self-references, hence
+  #       using ${var.website_bucket_name}
+  policy = <<POLICY
+{
+  "Version":"2012-10-17",
+  "Statement":[{
+	"Sid":"PublicReadGetObject",
+        "Effect":"Allow",
+	  "Principal": "*",
+      "Action":["s3:GetObject"],
+      "Resource":["arn:aws:s3:::${var.website_bucket_name}/*"
+      ]
+    }
+  ]
+}
+  POLICY
+
+
   tags = {
     "rule" = "web"
   }
@@ -60,11 +80,11 @@ resource "aws_s3_bucket" "website_bucket" {
 
 # single bucket object - file index.html
 resource "aws_s3_bucket_object" "object" {
-  bucket       = "${aws_s3_bucket.website_bucket.id}"
-  acl          = "public-read"
-  key          = "index.html"
+  bucket = "${aws_s3_bucket.website_bucket.id}"
+  acl = "public-read"
+  key = "index.html"
   content_type = "text/html"
-  source       = "./files/index.html"
+  source = "./files/index.html"
 
   tags = {
     "rule" = "web"
