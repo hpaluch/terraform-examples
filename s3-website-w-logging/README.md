@@ -102,5 +102,5 @@ convert  -pointsize 16 -font Ubuntu-Mono -fill blue \
 # issue this to list available fonts:
 convert -list font
 ```
-There is good introducaton on: http://www.imagemagick.org/Usage/text/#pointsize
+There is good introduction on: http://www.imagemagick.org/Usage/text/#pointsize
 
