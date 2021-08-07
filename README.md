@@ -8,11 +8,31 @@ be minimal unless you try some stress tests etc.).
 
 # Setup
 
-Tested environment:
+Update - latest tested environment:
+```bash
+# openSUSE LEAP 15.2
+sudo zypper in lsb-release
+
+lsb_release -d
+Description:	openSUSE Leap 15.2
+```
+
+Original Tested environment:
 ```bash
 lsb_release -sd
    Ubuntu 18.04.2 LTS
 ```
+
+## Setup - openSUSE LEAP 15.2
+
+For `openSUSE LEAP 15.2` just run:
+```bash
+sudo zypper in aws-cli terraform
+```
+
+## Setup - Ubuntu 18.04 LTS
+
+For Ubuntu 18.04 do this:
 
 Go to Download page https://www.terraform.io/downloads.html
 and download appropriate terraform version, in my case:
@@ -41,6 +61,8 @@ configured AWS CLI. If you have not installed it than issue
 ```bash
 apt-get install awscli
 ```
+
+# Setup (continued)
 
 And follow these steps to configure credentials: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html#cli-quick-configuration
 

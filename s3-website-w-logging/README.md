@@ -46,6 +46,17 @@ terraform validate
 # Success! The configuration is valid.
 ```
 
+NOTE: Recent terraform versions (for example `terraform-0.12.25-lp152.1.1.x86_64.rpm`)
+may produce this warning:
+
+```
+Warning: Interpolation-only expressions are deprecated
+
+  on main.tf line 52, in resource "aws_s3_bucket" "website_bucket":
+  52:     target_bucket = "${aws_s3_bucket.log_bucket.id}"
+```
+However it will still proceed.
+
 The finally you can invoke:
 ```bash
 terraform apply
@@ -106,3 +117,29 @@ convert -list font
 ```
 There is good introduction on: http://www.imagemagick.org/Usage/text/#pointsize
 
+# Destroy
+
+Theoretically it is easy - just run:
+
+```bash
+terraform destroy
+```
+
+However when `log-bucket` contains logs - it is not tracked and thus not expected by terraform
+so it will likely crash with this error:
+
+```
+error: error deleting S3 Bucket (bucket-log): BucketNotEmpty: The bucket you tried to delete is not empty
+```
+In such case you have to
+follow https://github.com/awsdocs/amazon-s3-developer-guide/blob/master/doc_source/delete-or-empty-bucket.md#empty-bucket-awscli to
+empty your `bucket-log`, for example:
+```bash
+aws s3 rm s3://bucket-log --recursive
+```
+
+And rerun
+```bash
+terraform destroy
+```
+--hp
